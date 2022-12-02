@@ -7,26 +7,44 @@ class App extends React.Component {
   state = {
     cardName: '',
     cardDescription: '',
-    cardAttr1: '',
-    cardAttr2: '',
-    cardAttr3: '',
+    cardAttr1: 0,
+    cardAttr2: 0,
+    cardAttr3: 0,
     cardImage: '',
     cardRare: 'normal',
     cardTrunfo: false,
     isSaveButtonDisabled: true,
+    cards: [],
   };
 
   validacaoBotao = () => {
-    const { cardName, cardDescription, cardImage, cardRare, cardAttr1, cardAttr2, cardAttr3 } = this.state;
-    const naovazio = cardName !== '' && cardDescription !== '' && cardImage !== '' && cardRare !== '';
-    const soma210 = (parseInt(cardAttr1) + parseInt(cardAttr2) + parseInt(cardAttr3)) <= 210;
-    const ate90 = cardAttr1 <= 90 && cardAttr2 <= 90 && cardAttr3 <= 90;
+    const {
+      cardName,
+      cardDescription,
+      cardImage,
+      cardRare,
+      cardAttr1,
+      cardAttr2,
+      cardAttr3 } = this.state;
+
+    const naovazio = cardName !== ''
+      && cardDescription !== ''
+      && cardImage !== ''
+      && cardRare !== '';
+
+    const duzentosDez = 210;
+    const soma210 = (parseInt(cardAttr1, 10)
+    + parseInt(cardAttr2, 10)
+    + parseInt(cardAttr3, 10))
+    <= duzentosDez;
+    const noventa = 90;
+    const ate90 = cardAttr1 <= noventa && cardAttr2 <= noventa && cardAttr3 <= noventa;
     const maior0 = cardAttr1 >= 0 && cardAttr2 >= 0 && cardAttr3 >= 0;
 
     this.setState({
       isSaveButtonDisabled: !(naovazio && soma210 && ate90 && maior0),
-    })
-  }
+    });
+  };
 
   onInputChange = ({ target }) => {
     const { name } = target;
@@ -34,6 +52,40 @@ class App extends React.Component {
     this.setState({
       [name]: value,
     }, this.validacaoBotao);
+  };
+
+  onSaveButtonClick = (e) => {
+    e.preventDefault();
+    const { cardName,
+      cardDescription,
+      cardAttr1,
+      cardAttr2,
+      cardAttr3,
+      cardImage,
+      cardRare,
+      cardTrunfo } = this.state;
+
+    const newCard = { cardName,
+      cardDescription,
+      cardAttr1,
+      cardAttr2,
+      cardAttr3,
+      cardImage,
+      cardRare,
+      cardTrunfo };
+
+    this.setState(({ cards }) => ({
+      cardName: '',
+      cardDescription: '',
+      cardAttr1: 0,
+      cardAttr2: 0,
+      cardAttr3: 0,
+      cardImage: '',
+      cardRare: 'normal',
+      cardTrunfo: false,
+      isSaveButtonDisabled: true,
+      cards: [...cards, newCard],
+    }));
   };
 
   render() {
@@ -44,22 +96,46 @@ class App extends React.Component {
       cardAttr3,
       cardImage,
       cardRare,
-      cardTrunfo } = this.state;
+      cardTrunfo,
+      cards } = this.state;
 
     return (
       <main>
-        <h1>Tryunfo</h1>
-        <Form { ...this.state } onInputChange={ this.onInputChange } />
-        <Card
-          cardName={ cardName }
-          cardDescription={ cardDescription }
-          cardAttr1={ cardAttr1 }
-          cardAttr2={ cardAttr2 }
-          cardAttr3={ cardAttr3 }
-          cardImage={ cardImage }
-          cardRare={ cardRare }
-          cardTrunfo={ cardTrunfo }
-        />
+        <section>
+          <h1>Tryunfo</h1>
+          <Form
+            { ...this.state }
+            onInputChange={ this.onInputChange }
+            onSaveButtonClick={ this.onSaveButtonClick }
+          />
+          <Card
+            cardName={ cardName }
+            cardDescription={ cardDescription }
+            cardAttr1={ cardAttr1 }
+            cardAttr2={ cardAttr2 }
+            cardAttr3={ cardAttr3 }
+            cardImage={ cardImage }
+            cardRare={ cardRare }
+            cardTrunfo={ cardTrunfo }
+          />
+        </section>
+        {/* <section>
+          {
+            cards.map(({ Name, Description, Attr1, Attr2, Attr3, Image, Rare, Trunfo}) => (
+              <Card
+                key={Name}
+                cardName={ Name }
+                cardDescription={ Description }
+                cardAttr1={ Attr1 }
+                cardAttr2={ Attr2 }
+                cardAttr3={ Attr3 }
+                cardImage={ Image }
+                cardRare={ Rare }
+                cardTrunfo={ Trunfo }
+              />
+            ))
+          }
+        </section> */}
       </main>
     );
   }
