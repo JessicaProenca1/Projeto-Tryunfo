@@ -100,7 +100,8 @@ class App extends React.Component {
       cardAttr3,
       cardImage,
       cardRare,
-      cardTrunfo } = this.state;
+      cardTrunfo,
+      cards } = this.state;
 
     return (
       <main>
@@ -122,23 +123,23 @@ class App extends React.Component {
             cardTrunfo={ cardTrunfo }
           />
         </section>
-        {/* <section>
+        <section>
           {
-            cards.map(({ Name, Description, Attr1, Attr2, Attr3, Image, Rare, Trunfo}) => (
+            cards.map((card) => (
               <Card
-                key={Name}
-                cardName={ Name }
-                cardDescription={ Description }
-                cardAttr1={ Attr1 }
-                cardAttr2={ Attr2 }
-                cardAttr3={ Attr3 }
-                cardImage={ Image }
-                cardRare={ Rare }
-                cardTrunfo={ Trunfo }
+                key={ card.cardName }
+                cardName={ card.cardName }
+                cardDescription={ card.cardDescription }
+                cardAttr1={ card.cardAttr1 }
+                cardAttr2={ card.cardAttr2 }
+                cardAttr3={ card.cardAttr3 }
+                cardImage={ card.cardImage }
+                cardRare={ card.cardRare }
+                cardTrunfo={ card.cardTrunfo }
               />
             ))
           }
-        </section> */}
+        </section>
       </main>
     );
   }
