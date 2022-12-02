@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 class Card extends React.Component {
   render() {
-    // const { trunfo } = this.state;
     const { cardName,
       cardDescription,
       cardAttr1,
