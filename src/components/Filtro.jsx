@@ -1,45 +1,51 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class Filtro extends React.Component {
   render() {
+    const { nameFilter, rareFilter, trunfoFilter, onInputChange, disabled } = this.props;
     return (
       <>
         <p>Filtrar Cartas:</p>
-        <label htmlFor="name-filter">
+        <label htmlFor="nameFilter">
           Por nome:
           <input
             data-testid="name-filter"
             type="text"
-            name="name-filter"
-            id="name-filter"
+            name="nameFilter"
+            id="nameFilter"
             onChange={ onInputChange }
-            value={ cardImage }
+            value={ nameFilter }
+            disabled={ disabled }
+
           />
         </label>
-        <label htmlFor="rare-filter">
+        <label htmlFor="rareFilter">
           Por raridade:
           <select
             data-testid="rare-filter"
             type="select"
-            name="rare-filter"
-            id="rare-filter"
+            name="rareFilter"
+            id="rareFilter"
             onChange={ onInputChange }
-            value={ cardImage }
+            value={ rareFilter }
+            disabled={ disabled }
+
           >
-            <option value="todas">todas</option>
+            <option value="">todas</option>
             <option value="normal">normal</option>
             <option value="raro">raro</option>
             <option value="muito raro">muito raro</option>
           </select>
         </label>
-        <label htmlFor="trunfo-filter">
+        <label htmlFor="trunfoFilter">
           Super Trunfo:
           <input
             type="checkbox"
-            name="trunfo-filter"
+            name="trunfoFilter"
             data-testid="trunfo-filter"
-            id="trunfo-filter"
-            checked={ cardTrunfo }
+            id="trunfoFilter"
+            checked={ trunfoFilter }
             onChange={ onInputChange }
           />
         </label>
@@ -47,5 +53,13 @@ class Filtro extends React.Component {
     );
   }
 }
+
+Filtro.propTypes = {
+  nameFilter: PropTypes.string.isRequired,
+  rareFilter: PropTypes.string.isRequired,
+  trunfoFilter: PropTypes.bool.isRequired,
+  onInputChange: PropTypes.func.isRequired,
+  disabled: PropTypes.bool.isRequired,
+};
 
 export default Filtro;

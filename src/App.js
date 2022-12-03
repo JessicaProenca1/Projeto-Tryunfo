@@ -18,6 +18,10 @@ class App extends React.Component {
     hasTrunfo: false,
     isSaveButtonDisabled: true,
     cards: [],
+    nameFilter: '',
+    rareFilter: '',
+    trunfoFilter: false,
+    disabled: false,
   };
 
   validacaoBotao = () => {
@@ -54,6 +58,7 @@ class App extends React.Component {
     const value = target.type === 'checkbox' ? target.checked : target.value;
     this.setState({
       [name]: value,
+      disabled: value,
     }, this.validacaoBotao);
   };
 
@@ -116,7 +121,10 @@ class App extends React.Component {
       cardImage,
       cardRare,
       cardTrunfo,
-      cards } = this.state;
+      cards,
+      nameFilter,
+      rareFilter,
+      trunfoFilter } = this.state;
 
     return (
       <main>
@@ -139,11 +147,22 @@ class App extends React.Component {
           />
         </section>
         <section>
-          <Filtro />
+          <Filtro
+            { ...this.state }
+            nameFilter={ nameFilter }
+            rareFilter={ rareFilter }
+            trunfoFilter={ trunfoFilter }
+            onInputChange={ this.onInputChange }
+          />
         </section>
         <section>
-          {
-            cards.map((card) => (
+          { cards
+            .filter((card) => (card.cardName.includes(nameFilter)))
+            .filter((raridade) => (rareFilter === 'raro'
+              ? raridade.cardRare === rareFilter
+              : raridade.cardRare.includes(rareFilter)))
+            .filter((trunfo) => (trunfo.cardTrunfo === trunfoFilter))
+            .map((card) => (
               <>
                 <Card
                   key={ card.cardName }
@@ -161,8 +180,7 @@ class App extends React.Component {
                   id={ card.cardName }
                 />
               </>
-            ))
-          }
+            ))}
         </section>
       </main>
     );
