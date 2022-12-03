@@ -58,7 +58,6 @@ class App extends React.Component {
     const value = target.type === 'checkbox' ? target.checked : target.value;
     this.setState({
       [name]: value,
-      disabled: value,
     }, this.validacaoBotao);
   };
 
@@ -161,7 +160,7 @@ class App extends React.Component {
             .filter((raridade) => (rareFilter === 'raro'
               ? raridade.cardRare === rareFilter
               : raridade.cardRare.includes(rareFilter)))
-            .filter((trunfo) => (trunfo.cardTrunfo === trunfoFilter))
+            // .filter((trunfo) => (trunfo.cardTrunfo === trunfoFilter))
             .map((card) => (
               <>
                 <Card
