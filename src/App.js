@@ -1,6 +1,7 @@
 import React from 'react';
 import Card from './components/Card';
 import Form from './components/Form';
+import Button from './components/Button';
 import './style.css';
 
 class App extends React.Component {
@@ -92,6 +93,19 @@ class App extends React.Component {
     }));
   };
 
+  funcExcluir = (carta) => {
+    const { cards } = this.state;
+    const cartasNaoDeletadas = cards
+      .filter((cardExcluir) => cardExcluir.cardName !== carta);
+    const trunfo = cartasNaoDeletadas
+      .some((cardExcluir) => cardExcluir.cardTrunfo === true);
+    const valor = trunfo === true;
+    this.setState({
+      hasTrunfo: valor,
+      cards: cartasNaoDeletadas,
+    });
+  };
+
   render() {
     const { cardName,
       cardDescription,
@@ -126,17 +140,23 @@ class App extends React.Component {
         <section>
           {
             cards.map((card) => (
-              <Card
-                key={ card.cardName }
-                cardName={ card.cardName }
-                cardDescription={ card.cardDescription }
-                cardAttr1={ card.cardAttr1 }
-                cardAttr2={ card.cardAttr2 }
-                cardAttr3={ card.cardAttr3 }
-                cardImage={ card.cardImage }
-                cardRare={ card.cardRare }
-                cardTrunfo={ card.cardTrunfo }
-              />
+              <>
+                <Card
+                  key={ card.cardName }
+                  cardName={ card.cardName }
+                  cardDescription={ card.cardDescription }
+                  cardAttr1={ card.cardAttr1 }
+                  cardAttr2={ card.cardAttr2 }
+                  cardAttr3={ card.cardAttr3 }
+                  cardImage={ card.cardImage }
+                  cardRare={ card.cardRare }
+                  cardTrunfo={ card.cardTrunfo }
+                />
+                <Button
+                  funcExcluir={ () => { this.funcExcluir(card.cardName); } }
+                  id={ card.cardName }
+                />
+              </>
             ))
           }
         </section>
