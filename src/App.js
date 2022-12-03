@@ -2,6 +2,7 @@ import React from 'react';
 import Card from './components/Card';
 import Form from './components/Form';
 import Button from './components/Button';
+import Filtro from './components/Filtro';
 import './style.css';
 
 class App extends React.Component {
@@ -136,6 +137,9 @@ class App extends React.Component {
             cardRare={ cardRare }
             cardTrunfo={ cardTrunfo }
           />
+        </section>
+        <section>
+          <Filtro />
         </section>
         <section>
           {
