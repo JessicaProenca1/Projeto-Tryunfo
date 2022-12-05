@@ -1,9 +1,12 @@
 import React from 'react';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 import Card from './components/Card';
-import Form from './components/Form';
-import Button from './components/Button';
+import Form2 from './components/Form';
+import Button2 from './components/Button';
 import Filtro from './components/Filtro';
-import './style.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 class App extends React.Component {
   state = {
@@ -131,25 +134,29 @@ class App extends React.Component {
       trunfoFilter } = this.state;
 
     return (
-      <main>
-        <section>
-          <h1>Tryunfo</h1>
-          <Form
-            { ...this.state }
-            onInputChange={ this.onInputChange }
-            onSaveButtonClick={ this.onSaveButtonClick }
-          />
-          <Card
-            cardName={ cardName }
-            cardDescription={ cardDescription }
-            cardAttr1={ cardAttr1 }
-            cardAttr2={ cardAttr2 }
-            cardAttr3={ cardAttr3 }
-            cardImage={ cardImage }
-            cardRare={ cardRare }
-            cardTrunfo={ cardTrunfo }
-          />
-        </section>
+      <Container fluid="sm">
+        <h1>Tryunfo</h1>
+        <Row>
+          <Col xs lg="5">
+            <Form2
+              { ...this.state }
+              onInputChange={ this.onInputChange }
+              onSaveButtonClick={ this.onSaveButtonClick }
+            />
+          </Col>
+          <Col xs lg="4">
+            <Card
+              cardName={ cardName }
+              cardDescription={ cardDescription }
+              cardAttr1={ cardAttr1 }
+              cardAttr2={ cardAttr2 }
+              cardAttr3={ cardAttr3 }
+              cardImage={ cardImage }
+              cardRare={ cardRare }
+              cardTrunfo={ cardTrunfo }
+            />
+          </Col>
+        </Row>
         <section>
           <Filtro
             { ...this.state }
@@ -175,7 +182,7 @@ class App extends React.Component {
                     cardRare={ card.cardRare }
                     cardTrunfo={ card.cardTrunfo }
                   />
-                  <Button
+                  <Button2
                     funcExcluir={ () => { this.funcExcluir(card.cardName); } }
                     id={ card.cardName }
                   />
@@ -199,14 +206,14 @@ class App extends React.Component {
                     cardRare={ card2.cardRare }
                     cardTrunfo={ card2.cardTrunfo }
                   />
-                  <Button
+                  <Button2
                     funcExcluir={ () => { this.funcExcluir(card2.cardName); } }
                     id={ card2.cardName }
                   />
                 </>
               ))}
         </section>
-      </main>
+      </Container>
     );
   }
 }

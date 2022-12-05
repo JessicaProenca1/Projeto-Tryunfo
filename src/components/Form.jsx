@@ -1,7 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
 
-class Form extends React.Component {
+class Form2 extends React.Component {
   render() {
     const { cardName,
       cardDescription,
@@ -16,7 +20,8 @@ class Form extends React.Component {
       onInputChange,
       onSaveButtonClick } = this.props;
 
-    const input = (<input
+    const input = (<Form.Check
+      label="Super Trunfo"
       type="checkbox"
       name="cardTrunfo"
       data-testid="trunfo-input"
@@ -26,105 +31,116 @@ class Form extends React.Component {
     />);
 
     return (
-      <form className="form">
-        <label htmlFor="cardName">
-          Nome da Carta:
-          <input
-            type="text"
-            name="cardName"
-            data-testid="name-input"
-            id="cardName"
-            onChange={ onInputChange }
-            value={ cardName }
-          />
-        </label>
+      <Form className="mb-3">
+        <Row className="mb-3">
+          <Form.Group htmlFor="cardName">
+            <Form.Label id="basic-addon2">Nome da Carta:</Form.Label>
+            <Form.Control
+              type="text"
+              name="cardName"
+              data-testid="name-input"
+              id="cardName"
+              onChange={ onInputChange }
+              value={ cardName }
+            />
+          </Form.Group>
+        </Row>
 
-        <label htmlFor="cardDescription">
-          Descrição:
-          <textarea
-            type="textarea"
-            name="cardDescription"
-            data-testid="description-input"
-            id="cardDescription"
-            onChange={ onInputChange }
-            value={ cardDescription }
-          />
-        </label>
+        <Row className="mb-3">
+          <Form.Group htmlFor="cardDescription">
+            <Form.Label>Descrição:</Form.Label>
+            <Form.Control
+              as="textarea"
+              type="textarea"
+              name="cardDescription"
+              data-testid="description-input"
+              id="cardDescription"
+              onChange={ onInputChange }
+              value={ cardDescription }
+            />
+          </Form.Group>
+        </Row>
 
-        <label htmlFor="cardAttr1">
-          Atributo 01:
-          <input
-            type="number"
-            name="cardAttr1"
-            data-testid="attr1-input"
-            id="cardAttr1"
-            onChange={ onInputChange }
-            value={ cardAttr1 }
-          />
-        </label>
+        <Row className="mb-3">
+          <Form.Group as={ Col } htmlFor="cardAttr1">
+            <Form.Label id="basic-addon2">Atributo 01:</Form.Label>
+            <Form.Control
+              type="number"
+              name="cardAttr1"
+              data-testid="attr1-input"
+              id="cardAttr1"
+              onChange={ onInputChange }
+              value={ cardAttr1 }
+            />
+          </Form.Group>
 
-        <label htmlFor="cardAttr2">
-          Atributo 02:
-          <input
-            type="number"
-            name="cardAttr2"
-            data-testid="attr2-input"
-            id="cardAttr2"
-            onChange={ onInputChange }
-            value={ cardAttr2 }
-          />
-        </label>
+          <Form.Group as={ Col } htmlFor="cardAttr2">
+            <Form.Label id="basic-addon2">Atributo 02:</Form.Label>
+            <Form.Control
+              type="number"
+              name="cardAttr2"
+              data-testid="attr2-input"
+              id="cardAttr2"
+              onChange={ onInputChange }
+              value={ cardAttr2 }
+            />
+          </Form.Group>
 
-        <label htmlFor="cardAttr3">
-          Atributo 03:
-          <input
-            type="number"
-            name="cardAttr3"
-            data-testid="attr3-input"
-            id="cardAttr3"
-            onChange={ onInputChange }
-            value={ cardAttr3 }
-          />
-        </label>
+          <Form.Group as={ Col } htmlFor="cardAttr3">
+            <Form.Label id="basic-addon2">Atributo 03:</Form.Label>
+            <Form.Control
+              type="number"
+              name="cardAttr3"
+              data-testid="attr3-input"
+              id="cardAttr3"
+              onChange={ onInputChange }
+              value={ cardAttr3 }
+            />
+          </Form.Group>
+        </Row>
 
-        <label htmlFor="cardImage">
-          Imagem:
-          <input
-            type="text"
-            name="cardImage"
-            data-testid="image-input"
-            id="cardImage"
-            onChange={ onInputChange }
-            value={ cardImage }
-          />
-        </label>
+        <Row className="mb-3">
+          <Form.Group htmlFor="cardImage">
+            <Form.Label id="basic-addon2">Imagem:</Form.Label>
+            <Form.Control
+              type="text"
+              name="cardImage"
+              data-testid="image-input"
+              id="cardImage"
+              onChange={ onInputChange }
+              value={ cardImage }
+            />
+          </Form.Group>
+        </Row>
 
-        <label htmlFor="cardRare">
-          Raridade:
-          <select
-            type="select"
-            name="cardRare"
-            data-testid="rare-input"
-            id="cardRare"
-            onChange={ onInputChange }
-            value={ cardRare }
-          >
-            <option value="normal">normal</option>
-            <option value="raro">raro</option>
-            <option value="muito raro">muito raro</option>
-          </select>
-        </label>
+        <Row className="mb-3">
+          <Form.Group as={ Col } htmlFor="cardRare">
+            <Form.Label id="basic-addon2">Raridade:</Form.Label>
+            <Form.Select
+              type="select"
+              name="cardRare"
+              data-testid="rare-input"
+              id="cardRare"
+              onChange={ onInputChange }
+              value={ cardRare }
+            >
+              <option value="normal">normal</option>
+              <option value="raro">raro</option>
+              <option value="muito raro">muito raro</option>
+            </Form.Select>
+          </Form.Group>
 
-        <label htmlFor="cardTrunfo">
-          Super Trunfo:
-          {
-            hasTrunfo === true
-              ? <p>Você já tem um Super Trunfo em seu baralho</p>
-              : input
-          }
-        </label>
+          <Form.Group as={ Col } htmlFor="cardTrunfo">
+            {
+              hasTrunfo === true
+                ? <p>Você já tem um Super Trunfo em seu baralho</p>
+                : input
+            }
+          </Form.Group>
+        </Row>
 
-        <button
+        <Button
+          variant="success"
           type="button"
           name="btn"
           data-testid="save-button"
@@ -133,13 +149,13 @@ class Form extends React.Component {
           disabled={ isSaveButtonDisabled }
         >
           Salvar
-        </button>
-      </form>
+        </Button>
+      </Form>
     );
   }
 }
 
-Form.propTypes = {
+Form2.propTypes = {
   cardName: PropTypes.string.isRequired,
   cardDescription: PropTypes.string.isRequired,
   cardAttr1: PropTypes.string.isRequired,
@@ -154,4 +170,4 @@ Form.propTypes = {
   isSaveButtonDisabled: PropTypes.bool.isRequired,
 };
 
-export default Form;
+export default Form2;
