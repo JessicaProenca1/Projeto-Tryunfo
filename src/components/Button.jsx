@@ -6,6 +6,7 @@ class Button extends React.Component {
     const { funcExcluir, id } = this.props;
     return (
       <button
+        variant="primary"
         data-testid="delete-button"
         type="button"
         onClick={ funcExcluir }
