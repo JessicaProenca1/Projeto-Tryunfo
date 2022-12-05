@@ -59,6 +59,11 @@ class App extends React.Component {
     this.setState({
       [name]: value,
     }, this.validacaoBotao);
+    if (target.name === 'trunfoFilter') {
+      this.setState({
+        disabled: value,
+      });
+    }
   };
 
   onSaveButtonClick = (e) => {
@@ -155,31 +160,51 @@ class App extends React.Component {
           />
         </section>
         <section>
-          { cards
-            .filter((card) => (card.cardName.includes(nameFilter)))
-            .filter((raridade) => (rareFilter === 'raro'
-              ? raridade.cardRare === rareFilter
-              : raridade.cardRare.includes(rareFilter)))
-            // .filter((trunfo) => (trunfo.cardTrunfo === trunfoFilter))
-            .map((card) => (
-              <>
-                <Card
-                  key={ card.cardName }
-                  cardName={ card.cardName }
-                  cardDescription={ card.cardDescription }
-                  cardAttr1={ card.cardAttr1 }
-                  cardAttr2={ card.cardAttr2 }
-                  cardAttr3={ card.cardAttr3 }
-                  cardImage={ card.cardImage }
-                  cardRare={ card.cardRare }
-                  cardTrunfo={ card.cardTrunfo }
-                />
-                <Button
-                  funcExcluir={ () => { this.funcExcluir(card.cardName); } }
-                  id={ card.cardName }
-                />
-              </>
-            ))}
+          { trunfoFilter === true
+            ? cards.filter((trunfo) => (trunfo.cardTrunfo === trunfoFilter))
+              .map((card) => (
+                <>
+                  <Card
+                    key={ card.cardName }
+                    cardName={ card.cardName }
+                    cardDescription={ card.cardDescription }
+                    cardAttr1={ card.cardAttr1 }
+                    cardAttr2={ card.cardAttr2 }
+                    cardAttr3={ card.cardAttr3 }
+                    cardImage={ card.cardImage }
+                    cardRare={ card.cardRare }
+                    cardTrunfo={ card.cardTrunfo }
+                  />
+                  <Button
+                    funcExcluir={ () => { this.funcExcluir(card.cardName); } }
+                    id={ card.cardName }
+                  />
+                </>
+              ))
+            : cards
+              .filter((card) => (card.cardName.includes(nameFilter)))
+              .filter((raridade) => (rareFilter === 'raro'
+                ? raridade.cardRare === rareFilter
+                : raridade.cardRare.includes(rareFilter)))
+              .map((card2) => (
+                <>
+                  <Card
+                    key={ card2.cardName }
+                    cardName={ card2.cardName }
+                    cardDescription={ card2.cardDescription }
+                    cardAttr1={ card2.cardAttr1 }
+                    cardAttr2={ card2.cardAttr2 }
+                    cardAttr3={ card2.cardAttr3 }
+                    cardImage={ card2.cardImage }
+                    cardRare={ card2.cardRare }
+                    cardTrunfo={ card2.cardTrunfo }
+                  />
+                  <Button
+                    funcExcluir={ () => { this.funcExcluir(card2.cardName); } }
+                    id={ card2.cardName }
+                  />
+                </>
+              ))}
         </section>
       </main>
     );
